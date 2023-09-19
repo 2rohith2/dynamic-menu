@@ -8,8 +8,8 @@ import "./index.scss";
 export default function MenuComponent(): JSX.Element {
   const [dropdownOptions, setDropdownOptions] = useState<ItemType[]>([]);
   const [screenWidth, setScreenWidth] = useState<number>(0);
-  const navigationItems = useRef(null);
-  const navigationContainer = useRef(null);
+  const navigationItems = useRef<HTMLDivElement>(null);
+  const navigationContainer = useRef<HTMLDivElement>(null);
 
   const links = [
     { href: "lifestyle", text: "lifestyle", key: 0 },
@@ -31,7 +31,7 @@ export default function MenuComponent(): JSX.Element {
     { href: "pets", text: "pets", key: 16 },
   ];
 
-  useState(() => {
+  useEffect(() => {
     function updateSize() {
       setScreenWidth(document.body.clientWidth);
     }
@@ -44,12 +44,13 @@ export default function MenuComponent(): JSX.Element {
     getNavigationBar();
   }, [screenWidth]);
 
-  function getNavigationBar(): JSX.Element[] {
+  function getNavigationBar(): void {
     if (!navigationItems.current || !navigationContainer.current) return;
 
     const childrenCount = navigationItems.current?.children.length;
     for (let index = 0; index < childrenCount; index++) {
-      navigationItems.current.removeChild(navigationItems.current.lastChild);
+      navigationItems.current.lastChild &&
+        navigationItems.current.removeChild(navigationItems.current.lastChild);
     }
 
     const tempDor = [];
@@ -63,19 +64,29 @@ export default function MenuComponent(): JSX.Element {
       } else {
         tempDor.push({
           key: link.key,
-          label: <a href={link.href} className="link">{link.text}</a>,
+          label: (
+            <a href={link.href} className="link">
+              {link.text}
+            </a>
+          ),
         });
       }
     }
 
     while (navigationContainer.current?.clientWidth >= screenWidth) {
-      const lastChild = navigationItems.current.removeChild(
-        navigationItems.current.lastChild
-        );
+      if (!navigationItems.current.lastChild) return;
+
+      // @ts-ignore
+      const lastChild: HTMLAnchorElement & ChildNode =
+        navigationItems.current.removeChild(navigationItems.current.lastChild);
 
       tempDor.unshift({
         key: self.crypto.randomUUID(),
-        label: <a href={lastChild.href} className="link">{lastChild.text}</a>,
+        label: (
+          <a href={lastChild.href} className="link">
+            {lastChild.text}
+          </a>
+        ),
       });
     }
 
