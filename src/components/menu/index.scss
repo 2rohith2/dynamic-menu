@@ -1,0 +1,65 @@
+$backgroundColor: #2f302c;
+$whiteColor: white;
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  background-color: $backgroundColor;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: 72px;
+}
+
+.link {
+  color: $whiteColor;
+  border-radius: 5px;
+  margin: 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.navbar {
+  @extend .flex;
+  position: fixed;
+  top: 0;
+  background-color: $backgroundColor;
+  padding: 20px;
+  gap: 10px;
+
+  a {
+    @extend .link
+  }
+
+  .logo {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: $whiteColor;
+  }
+}
+
+.input-search {
+  background-color: $backgroundColor;
+  color: $whiteColor;
+  width: 200px !important;
+  border-bottom: solid 1px #d4d4d4;
+  border-radius: 0px;
+  padding-left: 0px;
+
+  &:hover {
+    border-bottom: solid 1px white;
+    border-color: white !important;
+  }
+
+  ::placeholder {
+    color: $whiteColor;
+  }
+
+  input {
+    background-color: $backgroundColor;
+    color: $whiteColor;
+  }
+}
