@@ -1,4 +1,5 @@
 import Menu from "../components/menu";
+import Carousel from "../components/carousel";
 import "./index.scss";
 
 export default function HomeComponent(): JSX.Element {
@@ -6,6 +7,7 @@ export default function HomeComponent(): JSX.Element {
     <>
       <Menu />
       <div className="content">
+        <Carousel />
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget
           congue turpis, non maximus est. Sed tincidunt sem erat, quis venenatis
@@ -77,7 +79,8 @@ export default function HomeComponent(): JSX.Element {
           rutrum tristique, lectus lacus fermentum elit, fermentum sagittis
           tellus tortor vel metus. In ac arcu id augue convallis congue. In
           facilisis magna vitae semper pharetra. Proin vel scelerisque urna.{" "}
-        </p><p>
+        </p>
+        <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget
           congue turpis, non maximus est. Sed tincidunt sem erat, quis venenatis
           orci maximus eget. Nullam aliquet, lorem eget lacinia hendrerit, velit
